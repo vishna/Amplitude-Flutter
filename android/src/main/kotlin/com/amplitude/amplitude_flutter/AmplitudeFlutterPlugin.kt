@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.amplitude.api.Amplitude
 import com.amplitude.api.AmplitudeServerZone
+import com.amplitude.api.DeviceInfo
 import com.amplitude.api.Identify
 import com.amplitude.api.Revenue
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -227,6 +228,11 @@ class AmplitudeFlutterPlugin : FlutterPlugin, MethodCallHandler {
                 val client = Amplitude.getInstance(instanceName)
                 client.setMinTimeBetweenSessionsMillis(json.getLong("timeInMillis"))
                 result.success("setMinTimeBetweenSessionsMillis called..")
+            }
+
+            "setCustomAdvertisingId" -> {
+                DeviceInfo.customAdvertisingId = json.getString("advertisingId");
+                result.success("setCustomAdvertisingId called..")
             }
 
             "setServerZone" -> {
